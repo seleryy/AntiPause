@@ -1,4 +1,6 @@
-﻿using IPA;
+﻿using AntiPause.HarmonyPatcher;
+using BeatSaberMarkupLanguage.GameplaySetup;
+using IPA;
 using IPA.Config;
 using IPA.Config.Stores;
 using System;
@@ -32,14 +34,14 @@ namespace AntiPause
 
         #region BSIPA Config
         //Uncomment to use BSIPA's config
-        /*
+        
         [Init]
         public void InitWithConfig(Config conf)
         {
             Configuration.PluginConfig.Instance = conf.Generated<Configuration.PluginConfig>();
             Log.Debug("Config loaded");
         }
-        */
+        
         #endregion
 
         [OnStart]
@@ -48,12 +50,14 @@ namespace AntiPause
             Log.Debug("OnApplicationStart");
             new GameObject("AntiPauseController").AddComponent<AntiPauseController>();
             AntiPause.HarmonyPatcher.Patcher.Patch();
+            GameplaySetup.instance.AddTab("Anti Pause", "AntiPause.AntiPauseTab.bsml", MenuViewController.instance);
         }
 
         [OnExit]
         public void OnApplicationQuit()
         {
             Log.Debug("OnApplicationQuit");
+            Patcher.Unpatch();
 
         }
     }

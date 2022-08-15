@@ -1,4 +1,4 @@
-﻿/*
+﻿
 using System.Runtime.CompilerServices;
 using IPA.Config.Stores;
 
@@ -8,7 +8,7 @@ namespace AntiPause.Configuration
     internal class PluginConfig
     {
         public static PluginConfig Instance { get; set; }
-        public virtual int IntValue { get; set; } = 42; // Must be 'virtual' if you want BSIPA to detect a value change and save the config automatically.
+       public virtual bool enabled { get; set; } = true;
 
         /// <summary>
         /// This is called whenever BSIPA reads the config from disk (including when file changes are detected).
@@ -23,7 +23,14 @@ namespace AntiPause.Configuration
         /// </summary>
         public virtual void Changed()
         {
-            // Do stuff when the config is changed.
+            if (PluginConfig.Instance.enabled)
+            {
+                HarmonyPatcher.Patcher.Patch();
+            }
+            else
+            {
+                HarmonyPatcher.Patcher.Unpatch();
+            }
         }
 
         /// <summary>
@@ -35,4 +42,3 @@ namespace AntiPause.Configuration
         }
     }
 }
-*/

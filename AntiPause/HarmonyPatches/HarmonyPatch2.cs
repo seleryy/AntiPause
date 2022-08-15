@@ -10,8 +10,8 @@ using System.Text;
 /// </summary>
 namespace AntiPause.HarmonyPatches
 {
-    [HarmonyPatch(typeof(GamePause), nameof(GamePause.Pause))]
-    internal class PatchPauseMenu
+    [HarmonyPatch(typeof(PauseMenuManager), nameof(PauseMenuManager.ShowMenu))]
+    internal class PatchPauseMenuUI
     {
         public static bool Prefix()
         {

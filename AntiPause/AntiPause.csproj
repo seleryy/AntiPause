@@ -45,6 +45,11 @@
       <Private>False</Private>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="BSML, Version=1.6.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <Private>False</Private>
+      <HintPath>$(BeatSaberDir)\Plugins\BSML.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="BS_Utils">
       <HintPath>$(BeatSaberDir)\Plugins\BS_Utils.dll</HintPath>
       <Private>False</Private>
@@ -107,6 +112,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BSMLViewController1.cs" />
+    <Compile Include="ClassAntiPauseUI.cs" />
+    <Compile Include="HarmonyPatches\HarmonyPatch2.cs" />
     <Compile Include="HarmonyPatches\HarmonyPatch1.cs" />
     <Compile Include="HarmonyPatches\Patcher.cs" />
     <Compile Include="Plugin.cs" />
@@ -118,6 +126,10 @@
     <EmbeddedResource Include="manifest.json" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BSMLViewController1.bsml">
+      <DependentUpon>BSMLViewController1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AntiPauseTab.bsml" />
     <None Include="Directory.Build.props" Condition="Exists('Directory.Build.props')" />
     <None Include="AntiPause.csproj.user" Condition="Exists('AntiPause.csproj.user')" />
   </ItemGroup>
